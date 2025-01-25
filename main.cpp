@@ -1,3 +1,4 @@
+//多分サーバー側のプログラム
 #include <Novice.h>
 #include <math.h>
 #include <mmsystem.h>
