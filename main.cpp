@@ -159,12 +159,15 @@ DWORD WINAPI Threadfunc(void* px) {
 
 	while (1) {
 		// データ受信
-		int nRcv = recv(sWait, (char*)&sWait, sizeof(Circle), 0);
+		Circle receivedCircle;
+		int nRcv = recv(sConnect, (char*)&receivedCircle, sizeof(Circle), 0);
 
-		if (nRcv == SOCKET_ERROR)break;
+		if (nRcv == SOCKET_ERROR || nRcv == 0) {
+			break;
+		}
 
 		// データ送信
-		send(sWait, (const char*)&sWait, sizeof(Circle), 0);
+		send(sConnect, (const char*)&receivedCircle, sizeof(Circle), 0);
 	}
 
 	shutdown(sConnect, 2);
